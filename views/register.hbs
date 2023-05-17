@@ -1,0 +1,56 @@
+<div class="container mt-5">
+    <a href="/login" class="btn btn-info ms-2" type="button"><i class="fa-sharp fa-solid fa-arrow-left"></i> Return to LOGIN</a>
+
+    <h2 class="h2 mt-3 text-warning">Register User</h2>
+    <div class="row my-5">
+        <div class="col-12 col-md-6 px-3 mb-3">
+            <h3 class="h3 text-warning">
+                1. Capture Image
+            </h3>
+            <video id="video" autoplay class="rounded-3 img-fluid d-block"></video>
+            <button id="captureBtn" class="btn btn-warning mx-auto mt-3">Capture Image (0)</button>
+            <canvas id="canvas" style="display: none;"></canvas>
+        </div>
+
+        <div class="col-12 col-md-6 px-3">
+            <h3 class="h3 text-primary">
+                2. Fill Information
+            </h3>
+            <form id="registerUser">
+                <div class="mb-3">
+                    <label for="userId" class="form-label">User ID</label>
+                    <input type="text" class="form-control" id="userId" name="userId" disabled value="{{new_id}}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" required name="name">
+                </div>
+
+                <div class="mb-3">
+                    <label for="gender" class="form-label">Gender</label>
+                    <input type="text" class="form-control" id="gender" required name="gender">
+                </div>
+
+                <div class="mb-3">
+                    <label for="position" class="form-label">Position</label>
+                    <input type="text" class="form-control" id="position" required name="position">
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="text" class="form-control" id="password" required name="password">
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="admin" name="admin">
+                    <label class="form-check-label" for="admin">Admin</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="btnRegister" disabled>Register Now</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="javascripts/register.js"></script>

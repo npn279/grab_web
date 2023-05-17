@@ -1,0 +1,44 @@
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 70vh;
+        /* Set the height of the container to full viewport height */
+    }
+</style>
+
+<div class="container pt-5">
+    <div class="row align-items-center">
+        <div class="col-sm-6 col-12">
+            <img src="images/logo1.png" class="img-fluid rounded" alt="Logo">
+        </div>
+        <div class="col-sm-6 col-12">
+            <form action="/login" method="post">
+                <h3 class="h3"> - Login - </h3>
+                <div class="mt-3">
+                    <label for="loginUser" class="form-label">Username:</label>
+                    <input type="text" class="form-control" id="loginUser" name="loginUser" value="{{loginUser}}">
+                </div>
+
+                <div class="mt-3">
+                    <label for="loginPassword" class="form-label">Password:</label>
+                    <input type="password" class="form-control" id="loginPassword" name="loginPassword">
+                </div>
+
+                {{#if err}}
+                <div class="alert alert-danger mt-3 ">
+                    {{err}}
+                </div>
+                {{/if}}
+
+                <div class="col-12 mt-3">
+                    <button type="submit" class="btn btn-primary my-3 me-3">Sign in</button>
+
+                    <a href="/register" class="btn btn-info" type="button">Register New User</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
