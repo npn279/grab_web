@@ -158,10 +158,17 @@ router.post('/saveAllCSV', async (req, res) => {
     let year = data[0].date.split('/')[2]
     let folderName = `${month}-${year}`
     let folderID = await checkFolderExists(drive, process.env.REPORT_FOLDER_ID, folderName)
+
+    console.log("FOLDER ID", folderID);
+
     // CHECK IF FOLDER EXISTS
     if (!folderID) {
-        folderID = await createFolder(drive, process.env.REPORT_FOLDER_ID, folderName).id
+        folderID = await createFolder(drive, process.env.REPORT_FOLDER_ID, folderName)
+        console.log("FOLDER ID", folderID);
+    } else {
+        console.log('CANNOT CREATE FOLDER')
     }
+
 
     const csvWriter = createCsvWriter({
         path: `output_csv/data.csv`,
@@ -341,7 +348,7 @@ router.post('/saveCSVById', async (req, res) => {
     let folderID = await checkFolderExists(drive, process.env.REPORT_FOLDER_ID, folderName)
     // CHECK IF FOLDER EXISTS
     if (!folderID) {
-        folderID = await createFolder(drive, process.env.REPORT_FOLDER_ID, folderName).id
+        folderID = await createFolder(drive, process.env.REPORT_FOLDER_ID, folderName)
     }
 
     // Tạo tệp CSV cho từng loại user ID
@@ -458,7 +465,7 @@ router.post('/savePDFById', async (req, res) => {
     let folderID = await checkFolderExists(drive, process.env.REPORT_FOLDER_ID, folderName)
     // CHECK IF FOLDER EXISTS
     if (!folderID) {
-        folderID = await createFolder(drive, process.env.REPORT_FOLDER_ID, folderName).id
+        folderID = await createFolder(drive, process.env.REPORT_FOLDER_ID, folderName)
     }
 
     // Tạo tệp PDF cho từng loại user ID
@@ -673,7 +680,7 @@ function isWithinAMonth(startDate, endDate) {
 
 // Function to check if the folder exists within a specific folder ID, if it is created, return folderid
 async function checkFolderExists(drive, folderId, folderName) {
-    const query = `name = '${folderName}' and '${folderId}' in parents and mimeType = 'application/vnd.google-apps.folder'`;
+    const query = `name='${folderName}' and '${folderId}' in parents and mimeType='application/vnd.google-apps.folder'`;
     const response = await drive.files.list({ q: query });
 
     if (response.data.files.length > 0) {
@@ -696,7 +703,7 @@ async function createFolder(drive, folderId, folderName) {
         fields: 'id',
     });
 
-    return response.data;
+    return response.data.id;
 }
 
 module.exports = router;
